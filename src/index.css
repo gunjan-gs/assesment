@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Premium Zinc Palette - Light Mode */
+    --grid-border: #e4e4e7; /* zinc-200 */
+    --grid-surface: #ffffff;
+    --grid-header: #fafafa; /* zinc-50 - Lighter for cleaner look */
+    
+    --grid-text-primary: #18181b; /* zinc-900 */
+    --grid-text-secondary: #71717a; /* zinc-500 */
+
+    --grid-row-hover: #f4f4f5; /* zinc-100 */
+    --grid-row-selected: #f0f9ff; /* sky-50 - Very subtle */
+    --grid-row-active: #f1f5f9; /* slate-100 */
+    
+    --grid-cell-focus: #2563eb; /* blue-600 - slightly darker for better contrast */
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --grid-border: #27272a; /* zinc-800 */
+      --grid-surface: #09090b; /* zinc-950 */
+      --grid-header: #18181b; /* zinc-900 */
+
+      --grid-text-primary: #f4f4f5; /* zinc-100 */
+      --grid-text-secondary: #a1a1aa; /* zinc-400 */
+      
+      --grid-row-hover: #18181b; /* zinc-900 */
+      --grid-row-selected: #1e293b; /* slate-800 */
+      --grid-row-active: #27272a; /* zinc-800 */
+
+      --grid-cell-focus: #3b82f6; /* blue-500 */
+    }
+  }
+
+  body {
+    @apply antialiased text-zinc-900 dark:text-zinc-100 bg-white dark:bg-zinc-950 font-sans;
+    font-feature-settings: 'tnum'; /* Tabular nums by default for data-heavy apps */
+  }
+
+  @layer utilities {
+    @keyframes premiumEntry {
+      0% {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+        filter: blur(4px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    .animate-premium-entry {
+      /* Fluid physics-based ease-out: starts fast, lands soft */
+      animation: premiumEntry 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+      will-change: transform, opacity, filter;
+    }
+  }
+
+  /* Custom Scrollbar for Webkit */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-300 dark:bg-zinc-700 rounded-full border-[3px] border-solid border-transparent bg-clip-content;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-400 dark:bg-zinc-600;
+  }
+}
